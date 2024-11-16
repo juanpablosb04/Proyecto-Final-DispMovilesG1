@@ -40,6 +40,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'HomePage',
           path: '/homePage',
           builder: (context, params) => const HomePageWidget(),
+        ),
+        FFRoute(
+          name: 'login',
+          path: '/login',
+          builder: (context, params) => const LoginWidget(),
+        ),
+        FFRoute(
+          name: 'Register',
+          path: '/register',
+          builder: (context, params) => const RegisterWidget(),
+        ),
+        FFRoute(
+          name: 'ConfirmacionRegistro',
+          path: '/confirmacionRegistro',
+          builder: (context, params) => const ConfirmacionRegistroWidget(),
+        ),
+        FFRoute(
+          name: 'DetallesVuelo',
+          path: '/detallesVuelo',
+          builder: (context, params) => const DetallesVueloWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
