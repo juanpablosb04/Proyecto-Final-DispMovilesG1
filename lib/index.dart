@@ -5,3 +5,7 @@ export '/register/register_widget.dart' show RegisterWidget;
 export '/confirmacion_registro/confirmacion_registro_widget.dart'
     show ConfirmacionRegistroWidget;
 export '/detalles_vuelo/detalles_vuelo_widget.dart' show DetallesVueloWidget;
+export '/recuperar_contrasenna/recuperar_contrasenna_widget.dart'
+    show RecuperarContrasennaWidget;
+export '/confirmar_contrasenna/confirmar_contrasenna_widget.dart'
+    show ConfirmarContrasennaWidget;

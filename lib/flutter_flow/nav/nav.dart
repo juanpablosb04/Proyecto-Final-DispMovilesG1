@@ -60,6 +60,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'DetallesVuelo',
           path: '/detallesVuelo',
           builder: (context, params) => const DetallesVueloWidget(),
+        ),
+        FFRoute(
+          name: 'RecuperarContrasenna',
+          path: '/recuperarContrasenna',
+          builder: (context, params) => const RecuperarContrasennaWidget(),
+        ),
+        FFRoute(
+          name: 'ConfirmarContrasenna',
+          path: '/confirmarContrasenna',
+          builder: (context, params) => const ConfirmarContrasennaWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
