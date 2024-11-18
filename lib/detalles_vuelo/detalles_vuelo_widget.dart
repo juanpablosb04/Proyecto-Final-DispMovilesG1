@@ -93,16 +93,16 @@ class _DetallesVueloWidgetState extends State<DetallesVueloWidget> {
                 child: Container(
                   width: 417.0,
                   height: 248.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF1C213F),
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
-                    child: Image.network(
-                      '',
-                      width: 200.0,
-                      height: 200.0,
-                      fit: BoxFit.cover,
+                    child: Image.asset(
+                      'assets/images/mapa.png',
+                      width: double.infinity,
+                      height: double.infinity,
+                      fit: BoxFit.fitWidth,
                     ),
                   ),
                 ),

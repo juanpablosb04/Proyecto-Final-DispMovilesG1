@@ -62,7 +62,7 @@ class _LoginWidgetState extends State<LoginWidget> {
               children: [
                 Container(
                   width: 403.0,
-                  height: 544.0,
+                  height: 558.0,
                   decoration: const BoxDecoration(
                     color: Color(0xFF1C213F),
                     borderRadius: BorderRadius.only(

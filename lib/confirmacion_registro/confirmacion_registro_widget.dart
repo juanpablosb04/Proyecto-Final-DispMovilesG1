@@ -83,8 +83,8 @@ class _ConfirmacionRegistroWidgetState
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
-                            child: Image.network(
-                              'https://picsum.photos/seed/19/600',
+                            child: Image.asset(
+                              'assets/images/cuentaRegistrada.png',
                               width: 200.0,
                               height: 200.0,
                               fit: BoxFit.cover,
