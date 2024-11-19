@@ -70,6 +70,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ConfirmarContrasenna',
           path: '/confirmarContrasenna',
           builder: (context, params) => const ConfirmarContrasennaWidget(),
+        ),
+        FFRoute(
+          name: 'MantenimientoUsuario',
+          path: '/mantenimientoUsuario',
+          builder: (context, params) => const MantenimientoUsuarioWidget(),
+        ),
+        FFRoute(
+          name: 'MantenimientoVuelos',
+          path: '/mantenimientoVuelos',
+          builder: (context, params) => const MantenimientoVuelosWidget(),
+        ),
+        FFRoute(
+          name: 'MantenimientoPedidos',
+          path: '/mantenimientoPedidos',
+          builder: (context, params) => const MantenimientoPedidosWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -9,3 +9,9 @@ export '/recuperar_contrasenna/recuperar_contrasenna_widget.dart'
     show RecuperarContrasennaWidget;
 export '/confirmar_contrasenna/confirmar_contrasenna_widget.dart'
     show ConfirmarContrasennaWidget;
+export '/mantenimiento_usuario/mantenimiento_usuario_widget.dart'
+    show MantenimientoUsuarioWidget;
+export '/mantenimiento_vuelos/mantenimiento_vuelos_widget.dart'
+    show MantenimientoVuelosWidget;
+export '/mantenimiento_pedidos/mantenimiento_pedidos_widget.dart'
+    show MantenimientoPedidosWidget;
