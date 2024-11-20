@@ -15,3 +15,4 @@ export '/mantenimiento_vuelos/mantenimiento_vuelos_widget.dart'
     show MantenimientoVuelosWidget;
 export '/mantenimiento_pedidos/mantenimiento_pedidos_widget.dart'
     show MantenimientoPedidosWidget;
+export '/rastreo_vuelos/rastreo_vuelos_widget.dart' show RastreoVuelosWidget;

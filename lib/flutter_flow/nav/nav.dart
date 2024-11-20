@@ -85,6 +85,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'MantenimientoPedidos',
           path: '/mantenimientoPedidos',
           builder: (context, params) => const MantenimientoPedidosWidget(),
+        ),
+        FFRoute(
+          name: 'RastreoVuelos',
+          path: '/rastreoVuelos',
+          builder: (context, params) => const RastreoVuelosWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
