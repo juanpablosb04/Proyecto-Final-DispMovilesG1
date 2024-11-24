@@ -58,7 +58,7 @@ class _ConfirmacionRegistroWidgetState
               children: [
                 Container(
                   width: 403.0,
-                  height: 544.0,
+                  height: 556.0,
                   decoration: const BoxDecoration(
                     color: Color(0xFF1C213F),
                     borderRadius: BorderRadius.only(
@@ -77,15 +77,14 @@ class _ConfirmacionRegistroWidgetState
                         child: Container(
                           width: 155.0,
                           height: 143.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                          decoration: const BoxDecoration(
+                            color: Color(0xFF1C213F),
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: Image.asset(
                               'assets/images/cuentaRegistrada.png',
-                              width: 200.0,
+                              width: 220.0,
                               height: 200.0,
                               fit: BoxFit.cover,
                             ),

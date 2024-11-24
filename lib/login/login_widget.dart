@@ -365,13 +365,23 @@ class _LoginWidgetState extends State<LoginWidget> {
                               letterSpacing: 0.0,
                             ),
                       ),
-                      Text(
-                        'Register',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              color: Colors.white,
-                              letterSpacing: 0.0,
-                            ),
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed('Register');
+                        },
+                        child: Text(
+                          'Register',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Inter',
+                                    color: Colors.white,
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
                       ),
                     ],
                   ),

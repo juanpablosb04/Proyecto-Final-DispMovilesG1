@@ -61,7 +61,7 @@ class _RecuperarContrasennaWidgetState
               children: [
                 Container(
                   width: 403.0,
-                  height: 544.0,
+                  height: 552.0,
                   decoration: const BoxDecoration(
                     color: Color(0xFF1C213F),
                     borderRadius: BorderRadius.only(
@@ -238,8 +238,8 @@ class _RecuperarContrasennaWidgetState
                             child: Align(
                               alignment: const AlignmentDirectional(0.0, 0.0),
                               child: FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
+                                onPressed: () async {
+                                  context.pushNamed('login');
                                 },
                                 text: 'Enviar',
                                 options: FFButtonOptions(

@@ -65,7 +65,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               children: [
                 Container(
                   width: 403.0,
-                  height: 544.0,
+                  height: 555.0,
                   decoration: const BoxDecoration(
                     color: Color(0xFF1C213F),
                     borderRadius: BorderRadius.only(
