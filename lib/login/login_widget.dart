@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -22,11 +23,11 @@ class _LoginWidgetState extends State<LoginWidget> {
     super.initState();
     _model = createModel(context, () => LoginModel());
 
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode1 ??= FocusNode();
+    _model.emailLogInTextController ??= TextEditingController();
+    _model.emailLogInFocusNode ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
-    _model.textFieldFocusNode2 ??= FocusNode();
+    _model.contrasenaLogInTextController ??= TextEditingController();
+    _model.contrasenaLogInFocusNode ??= FocusNode();
   }
 
   @override
@@ -128,8 +129,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 child: SizedBox(
                                   width: 200.0,
                                   child: TextFormField(
-                                    controller: _model.textController1,
-                                    focusNode: _model.textFieldFocusNode1,
+                                    controller: _model.emailLogInTextController,
+                                    focusNode: _model.emailLogInFocusNode,
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -193,7 +194,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         ),
                                     cursorColor: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    validator: _model.textController1Validator
+                                    validator: _model
+                                        .emailLogInTextControllerValidator
                                         .asValidator(context),
                                   ),
                                 ),
@@ -241,10 +243,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 child: SizedBox(
                                   width: 200.0,
                                   child: TextFormField(
-                                    controller: _model.textController2,
-                                    focusNode: _model.textFieldFocusNode2,
+                                    controller:
+                                        _model.contrasenaLogInTextController,
+                                    focusNode: _model.contrasenaLogInFocusNode,
                                     autofocus: false,
-                                    obscureText: false,
+                                    obscureText:
+                                        !_model.contrasenaLogInVisibility,
                                     decoration: InputDecoration(
                                       isDense: true,
                                       labelStyle: FlutterFlowTheme.of(context)
@@ -296,6 +300,21 @@ class _LoginWidgetState extends State<LoginWidget> {
                                       ),
                                       filled: true,
                                       fillColor: const Color(0xFF242A4F),
+                                      suffixIcon: InkWell(
+                                        onTap: () => safeSetState(
+                                          () => _model
+                                                  .contrasenaLogInVisibility =
+                                              !_model.contrasenaLogInVisibility,
+                                        ),
+                                        focusNode:
+                                            FocusNode(skipTraversal: true),
+                                        child: Icon(
+                                          _model.contrasenaLogInVisibility
+                                              ? Icons.visibility_outlined
+                                              : Icons.visibility_off_outlined,
+                                          size: 22,
+                                        ),
+                                      ),
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -306,7 +325,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         ),
                                     cursorColor: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    validator: _model.textController2Validator
+                                    validator: _model
+                                        .contrasenaLogInTextControllerValidator
                                         .asValidator(context),
                                   ),
                                 ),
@@ -332,10 +352,22 @@ class _LoginWidgetState extends State<LoginWidget> {
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 25.0),
                         child: FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            GoRouter.of(context).prepareAuthEvent();
+
+                            final user = await authManager.signInWithEmail(
+                              context,
+                              _model.emailLogInTextController.text,
+                              _model.contrasenaLogInTextController.text,
+                            );
+                            if (user == null) {
+                              return;
+                            }
+
+                            context.goNamedAuth(
+                                'RastreoVuelos', context.mounted);
                           },
-                          text: 'Log In',
+                          text: 'Iniciar sesion',
                           options: FFButtonOptions(
                             width: 318.0,
                             height: 40.0,

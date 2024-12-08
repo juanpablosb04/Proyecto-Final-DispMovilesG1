@@ -1,4 +1,6 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/components/navbar_widget.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -83,6 +85,27 @@ class _RastreoVuelosWidgetState extends State<RastreoVuelosWidget> {
                           Icons.keyboard_arrow_down_sharp,
                           color: Color(0xbacdf2c21a),
                           size: 24.0,
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              55.0, 0.0, 0.0, 0.0),
+                          child: FlutterFlowIconButton(
+                            borderRadius: 8.0,
+                            buttonSize: 40.0,
+                            fillColor: const Color(0xFF1C213F),
+                            icon: Icon(
+                              Icons.logout,
+                              color: FlutterFlowTheme.of(context).info,
+                              size: 24.0,
+                            ),
+                            onPressed: () async {
+                              GoRouter.of(context).prepareAuthEvent();
+                              await authManager.signOut();
+                              GoRouter.of(context).clearRedirectLocation();
+
+                              context.goNamedAuth('Register', context.mounted);
+                            },
+                          ),
                         ),
                         const Expanded(
                           child: Align(

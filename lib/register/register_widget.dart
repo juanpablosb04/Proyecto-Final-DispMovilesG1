@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -22,14 +23,14 @@ class _RegisterWidgetState extends State<RegisterWidget> {
     super.initState();
     _model = createModel(context, () => RegisterModel());
 
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode1 ??= FocusNode();
+    _model.emailTextController ??= TextEditingController();
+    _model.emailFocusNode ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
-    _model.textFieldFocusNode2 ??= FocusNode();
+    _model.passwordTextController ??= TextEditingController();
+    _model.passwordFocusNode ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController();
-    _model.textFieldFocusNode3 ??= FocusNode();
+    _model.rpasswordTextController ??= TextEditingController();
+    _model.rpasswordFocusNode ??= FocusNode();
   }
 
   @override
@@ -131,8 +132,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                 child: SizedBox(
                                   width: 200.0,
                                   child: TextFormField(
-                                    controller: _model.textController1,
-                                    focusNode: _model.textFieldFocusNode1,
+                                    controller: _model.emailTextController,
+                                    focusNode: _model.emailFocusNode,
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -196,7 +197,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                         ),
                                     cursorColor: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    validator: _model.textController1Validator
+                                    validator: _model
+                                        .emailTextControllerValidator
                                         .asValidator(context),
                                   ),
                                 ),
@@ -244,10 +246,10 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                 child: SizedBox(
                                   width: 200.0,
                                   child: TextFormField(
-                                    controller: _model.textController2,
-                                    focusNode: _model.textFieldFocusNode2,
+                                    controller: _model.passwordTextController,
+                                    focusNode: _model.passwordFocusNode,
                                     autofocus: false,
-                                    obscureText: false,
+                                    obscureText: !_model.passwordVisibility,
                                     decoration: InputDecoration(
                                       isDense: true,
                                       labelStyle: FlutterFlowTheme.of(context)
@@ -299,6 +301,20 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                       ),
                                       filled: true,
                                       fillColor: const Color(0xFF242A4F),
+                                      suffixIcon: InkWell(
+                                        onTap: () => safeSetState(
+                                          () => _model.passwordVisibility =
+                                              !_model.passwordVisibility,
+                                        ),
+                                        focusNode:
+                                            FocusNode(skipTraversal: true),
+                                        child: Icon(
+                                          _model.passwordVisibility
+                                              ? Icons.visibility_outlined
+                                              : Icons.visibility_off_outlined,
+                                          size: 22,
+                                        ),
+                                      ),
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -309,7 +325,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                         ),
                                     cursorColor: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    validator: _model.textController2Validator
+                                    validator: _model
+                                        .passwordTextControllerValidator
                                         .asValidator(context),
                                   ),
                                 ),
@@ -357,10 +374,10 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                 child: SizedBox(
                                   width: 200.0,
                                   child: TextFormField(
-                                    controller: _model.textController3,
-                                    focusNode: _model.textFieldFocusNode3,
+                                    controller: _model.rpasswordTextController,
+                                    focusNode: _model.rpasswordFocusNode,
                                     autofocus: false,
-                                    obscureText: false,
+                                    obscureText: !_model.rpasswordVisibility,
                                     decoration: InputDecoration(
                                       isDense: true,
                                       labelStyle: FlutterFlowTheme.of(context)
@@ -412,6 +429,20 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                       ),
                                       filled: true,
                                       fillColor: const Color(0xFF242A4F),
+                                      suffixIcon: InkWell(
+                                        onTap: () => safeSetState(
+                                          () => _model.rpasswordVisibility =
+                                              !_model.rpasswordVisibility,
+                                        ),
+                                        focusNode:
+                                            FocusNode(skipTraversal: true),
+                                        child: Icon(
+                                          _model.rpasswordVisibility
+                                              ? Icons.visibility_outlined
+                                              : Icons.visibility_off_outlined,
+                                          size: 22,
+                                        ),
+                                      ),
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -422,7 +453,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                         ),
                                     cursorColor: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    validator: _model.textController3Validator
+                                    validator: _model
+                                        .rpasswordTextControllerValidator
                                         .asValidator(context),
                                   ),
                                 ),
@@ -433,12 +465,36 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 25.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
                         child: FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            GoRouter.of(context).prepareAuthEvent();
+                            if (_model.passwordTextController.text !=
+                                _model.rpasswordTextController.text) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    'Passwords don\'t match!',
+                                  ),
+                                ),
+                              );
+                              return;
+                            }
+
+                            final user =
+                                await authManager.createAccountWithEmail(
+                              context,
+                              _model.emailTextController.text,
+                              _model.passwordTextController.text,
+                            );
+                            if (user == null) {
+                              return;
+                            }
+
+                            context.goNamedAuth(
+                                'RastreoVuelos', context.mounted);
                           },
-                          text: 'Log In',
+                          text: 'Registrarse',
                           options: FFButtonOptions(
                             width: 318.0,
                             height: 40.0,
@@ -457,6 +513,25 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                             elevation: 0.0,
                             borderRadius: BorderRadius.circular(8.0),
                           ),
+                        ),
+                      ),
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed('login');
+                        },
+                        child: Text(
+                          '¿Ya tienes una cuenta?',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Inter',
+                                    color: Colors.white,
+                                    fontSize: 16.0,
+                                    letterSpacing: 0.0,
+                                  ),
                         ),
                       ),
                     ],
