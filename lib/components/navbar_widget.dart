@@ -72,7 +72,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                           size: 24.0,
                         ),
                         onPressed: () async {
-                          context.pushNamed('HomePage');
+                          context.pushNamed('RastreoVuelosP');
                         },
                       ),
                       FlutterFlowIconButton(
@@ -107,8 +107,8 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                           color: FlutterFlowTheme.of(context).secondaryText,
                           size: 24.0,
                         ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
+                        onPressed: () async {
+                          context.pushNamed('MantenimientoUsuario');
                         },
                       ),
                     ],

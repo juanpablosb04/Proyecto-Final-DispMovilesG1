@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/components/navbar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -25,11 +26,11 @@ class _ConfirmarContrasennaWidgetState
     super.initState();
     _model = createModel(context, () => ConfirmarContrasennaModel());
 
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode1 ??= FocusNode();
+    _model.passwordTextController ??= TextEditingController();
+    _model.passwordFocusNode ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
-    _model.textFieldFocusNode2 ??= FocusNode();
+    _model.rpasswordTextController ??= TextEditingController();
+    _model.rpasswordFocusNode ??= FocusNode();
   }
 
   @override
@@ -42,7 +43,10 @@ class _ConfirmarContrasennaWidgetState
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).accent1,
@@ -81,6 +85,29 @@ class _ConfirmarContrasennaWidgetState
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.pushNamed('login');
+                                  },
+                                  child: Icon(
+                                    Icons.arrow_back,
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    size: 24.0,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 20.0, 0.0, 20.0),
@@ -133,10 +160,11 @@ class _ConfirmarContrasennaWidgetState
                                     child: SizedBox(
                                       width: 200.0,
                                       child: TextFormField(
-                                        controller: _model.textController1,
-                                        focusNode: _model.textFieldFocusNode1,
+                                        controller:
+                                            _model.passwordTextController,
+                                        focusNode: _model.passwordFocusNode,
                                         autofocus: false,
-                                        obscureText: false,
+                                        obscureText: !_model.passwordVisibility,
                                         decoration: InputDecoration(
                                           isDense: true,
                                           labelStyle:
@@ -193,6 +221,21 @@ class _ConfirmarContrasennaWidgetState
                                           ),
                                           filled: true,
                                           fillColor: const Color(0xFF242A4F),
+                                          suffixIcon: InkWell(
+                                            onTap: () => safeSetState(
+                                              () => _model.passwordVisibility =
+                                                  !_model.passwordVisibility,
+                                            ),
+                                            focusNode:
+                                                FocusNode(skipTraversal: true),
+                                            child: Icon(
+                                              _model.passwordVisibility
+                                                  ? Icons.visibility_outlined
+                                                  : Icons
+                                                      .visibility_off_outlined,
+                                              size: 22,
+                                            ),
+                                          ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
@@ -205,7 +248,7 @@ class _ConfirmarContrasennaWidgetState
                                             FlutterFlowTheme.of(context)
                                                 .primaryText,
                                         validator: _model
-                                            .textController1Validator
+                                            .passwordTextControllerValidator
                                             .asValidator(context),
                                       ),
                                     ),
@@ -253,10 +296,12 @@ class _ConfirmarContrasennaWidgetState
                                     child: SizedBox(
                                       width: 200.0,
                                       child: TextFormField(
-                                        controller: _model.textController2,
-                                        focusNode: _model.textFieldFocusNode2,
+                                        controller:
+                                            _model.rpasswordTextController,
+                                        focusNode: _model.rpasswordFocusNode,
                                         autofocus: false,
-                                        obscureText: false,
+                                        obscureText:
+                                            !_model.rpasswordVisibility,
                                         decoration: InputDecoration(
                                           isDense: true,
                                           labelStyle:
@@ -266,7 +311,7 @@ class _ConfirmarContrasennaWidgetState
                                                     fontFamily: 'Inter',
                                                     letterSpacing: 0.0,
                                                   ),
-                                          hintText: 'Ingrese su contraseña',
+                                          hintText: 'Reingrese su contraseña',
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
                                                   .labelMedium
@@ -313,6 +358,21 @@ class _ConfirmarContrasennaWidgetState
                                           ),
                                           filled: true,
                                           fillColor: const Color(0xFF242A4F),
+                                          suffixIcon: InkWell(
+                                            onTap: () => safeSetState(
+                                              () => _model.rpasswordVisibility =
+                                                  !_model.rpasswordVisibility,
+                                            ),
+                                            focusNode:
+                                                FocusNode(skipTraversal: true),
+                                            child: Icon(
+                                              _model.rpasswordVisibility
+                                                  ? Icons.visibility_outlined
+                                                  : Icons
+                                                      .visibility_off_outlined,
+                                              size: 22,
+                                            ),
+                                          ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
@@ -325,7 +385,7 @@ class _ConfirmarContrasennaWidgetState
                                             FlutterFlowTheme.of(context)
                                                 .primaryText,
                                         validator: _model
-                                            .textController2Validator
+                                            .rpasswordTextControllerValidator
                                             .asValidator(context),
                                       ),
                                     ),
@@ -345,8 +405,17 @@ class _ConfirmarContrasennaWidgetState
                                   child: Align(
                                     alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
+                                      onPressed: () async {
+                                        await authManager.updatePassword(
+                                          newPassword: _model
+                                              .passwordTextController.text,
+                                          context: context,
+                                        );
+                                        safeSetState(() {});
+
+                                        context.pushNamedAuth(
+                                            'MantenimientoUsuario',
+                                            context.mounted);
                                       },
                                       text: 'Realizar cambios',
                                       options: FFButtonOptions(

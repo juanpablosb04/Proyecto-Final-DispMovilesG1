@@ -40,7 +40,10 @@ class _LoginWidgetState extends State<LoginWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).accent1,
@@ -338,14 +341,24 @@ class _LoginWidgetState extends State<LoginWidget> {
                       Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 38.0),
-                        child: Text(
-                          '¿Olvidó su contraseña?',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Inter',
-                                    color: const Color(0xFF646897),
-                                    letterSpacing: 0.0,
-                                  ),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed('RecuperarContrasenna');
+                          },
+                          child: Text(
+                            '¿Olvidó su contraseña?',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  color: const Color(0xFF646897),
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
                         ),
                       ),
                       Padding(
@@ -365,7 +378,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                             }
 
                             context.goNamedAuth(
-                                'RastreoVuelos', context.mounted);
+                                'RastreoVuelosP', context.mounted);
                           },
                           text: 'Iniciar sesion',
                           options: FFButtonOptions(

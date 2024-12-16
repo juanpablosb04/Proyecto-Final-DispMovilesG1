@@ -1,9 +1,9 @@
 import '/components/navbar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'rastreo_vuelos_widget.dart' show RastreoVuelosWidget;
+import 'rastreo_vuelos_p_widget.dart' show RastreoVuelosPWidget;
 import 'package:flutter/material.dart';
 
-class RastreoVuelosModel extends FlutterFlowModel<RastreoVuelosWidget> {
+class RastreoVuelosPModel extends FlutterFlowModel<RastreoVuelosPWidget> {
   ///  State fields for stateful widgets in this page.
 
   // Model for navbar component.

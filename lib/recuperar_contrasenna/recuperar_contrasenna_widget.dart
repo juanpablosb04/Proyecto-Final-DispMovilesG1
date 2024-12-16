@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -24,8 +25,8 @@ class _RecuperarContrasennaWidgetState
     super.initState();
     _model = createModel(context, () => RecuperarContrasennaModel());
 
-    _model.textController ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
+    _model.recuperarContraTextController ??= TextEditingController();
+    _model.recuperarContraFocusNode ??= FocusNode();
   }
 
   @override
@@ -38,7 +39,10 @@ class _RecuperarContrasennaWidgetState
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).accent1,
@@ -74,9 +78,31 @@ class _RecuperarContrasennaWidgetState
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed('login');
+                              },
+                              child: const Icon(
+                                Icons.arrow_back,
+                                color: Colors.white,
+                                size: 24.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
                         child: Container(
                           width: 155.0,
                           height: 143.0,
@@ -162,8 +188,9 @@ class _RecuperarContrasennaWidgetState
                               child: SizedBox(
                                 width: 200.0,
                                 child: TextFormField(
-                                  controller: _model.textController,
-                                  focusNode: _model.textFieldFocusNode,
+                                  controller:
+                                      _model.recuperarContraTextController,
+                                  focusNode: _model.recuperarContraFocusNode,
                                   autofocus: false,
                                   obscureText: false,
                                   decoration: InputDecoration(
@@ -223,7 +250,8 @@ class _RecuperarContrasennaWidgetState
                                       ),
                                   cursorColor:
                                       FlutterFlowTheme.of(context).primaryText,
-                                  validator: _model.textControllerValidator
+                                  validator: _model
+                                      .recuperarContraTextControllerValidator
                                       .asValidator(context),
                                 ),
                               ),
@@ -239,6 +267,23 @@ class _RecuperarContrasennaWidgetState
                               alignment: const AlignmentDirectional(0.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
+                                  if (_model.recuperarContraTextController.text
+                                      .isEmpty) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                          'Email required!',
+                                        ),
+                                      ),
+                                    );
+                                    return;
+                                  }
+                                  await authManager.resetPassword(
+                                    email: _model
+                                        .recuperarContraTextController.text,
+                                    context: context,
+                                  );
+
                                   context.pushNamed('login');
                                 },
                                 text: 'Enviar',

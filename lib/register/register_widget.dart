@@ -43,7 +43,10 @@ class _RegisterWidgetState extends State<RegisterWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).accent1,
@@ -81,7 +84,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                     children: [
                       Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
-                            0.0, 35.0, 0.0, 65.0),
+                            0.0, 35.0, 0.0, 40.0),
                         child: Text(
                           'Registro',
                           style:
@@ -492,7 +495,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                             }
 
                             context.goNamedAuth(
-                                'RastreoVuelos', context.mounted);
+                                'RastreoVuelosP', context.mounted);
                           },
                           text: 'Registrarse',
                           options: FFButtonOptions(
@@ -515,23 +518,27 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                           ),
                         ),
                       ),
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed('login');
-                        },
-                        child: Text(
-                          '¿Ya tienes una cuenta?',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Inter',
-                                    color: Colors.white,
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                  ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed('login');
+                          },
+                          child: Text(
+                            '¿Ya tienes una cuenta?',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  color: Colors.white,
+                                  fontSize: 16.0,
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
                         ),
                       ),
                     ],

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -72,13 +73,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const RastreoVuelosWidget() : const RegisterWidget(),
+          appStateNotifier.loggedIn ? const RastreoVuelosPWidget() : const RegisterWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? const RastreoVuelosWidget()
+              ? const RastreoVuelosPWidget()
               : const RegisterWidget(),
         ),
         FFRoute(
@@ -122,9 +123,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const MantenimientoUsuarioWidget(),
         ),
         FFRoute(
-          name: 'MantenimientoVuelos',
-          path: '/mantenimientoVuelos',
-          builder: (context, params) => const MantenimientoVuelosWidget(),
+          name: 'MantenimientoVuelosAdministradorP',
+          path: '/mantenimientoVuelosAdministradorP',
+          builder: (context, params) =>
+              const MantenimientoVuelosAdministradorPWidget(),
         ),
         FFRoute(
           name: 'MantenimientoPedidos',
@@ -132,9 +134,37 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const MantenimientoPedidosWidget(),
         ),
         FFRoute(
-          name: 'RastreoVuelos',
-          path: '/rastreoVuelos',
-          builder: (context, params) => const RastreoVuelosWidget(),
+          name: 'RastreoVuelosP',
+          path: '/rastreoVuelosP',
+          builder: (context, params) => const RastreoVuelosPWidget(),
+        ),
+        FFRoute(
+          name: 'DatosUsuario',
+          path: '/datosUsuario',
+          builder: (context, params) => const DatosUsuarioWidget(),
+        ),
+        FFRoute(
+          name: 'CreateVuelos',
+          path: '/createVuelos',
+          builder: (context, params) => const CreateVuelosWidget(),
+        ),
+        FFRoute(
+          name: 'viewvuelo',
+          path: '/viewvuelo',
+          builder: (context, params) => const ViewvueloWidget(),
+        ),
+        FFRoute(
+          name: 'EditVuelos',
+          path: '/editVuelos',
+          asyncParams: {
+            'skuVuelo': getDoc(['vuelos'], VuelosRecord.fromSnapshot),
+          },
+          builder: (context, params) => EditVuelosWidget(
+            skuVuelo: params.getParam(
+              'skuVuelo',
+              ParamType.Document,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -3,26 +3,28 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'mantenimiento_vuelos_model.dart';
-export 'mantenimiento_vuelos_model.dart';
+import 'mantenimiento_vuelos_administrador_p_model.dart';
+export 'mantenimiento_vuelos_administrador_p_model.dart';
 
-class MantenimientoVuelosWidget extends StatefulWidget {
-  const MantenimientoVuelosWidget({super.key});
+class MantenimientoVuelosAdministradorPWidget extends StatefulWidget {
+  const MantenimientoVuelosAdministradorPWidget({super.key});
 
   @override
-  State<MantenimientoVuelosWidget> createState() =>
-      _MantenimientoVuelosWidgetState();
+  State<MantenimientoVuelosAdministradorPWidget> createState() =>
+      _MantenimientoVuelosAdministradorPWidgetState();
 }
 
-class _MantenimientoVuelosWidgetState extends State<MantenimientoVuelosWidget> {
-  late MantenimientoVuelosModel _model;
+class _MantenimientoVuelosAdministradorPWidgetState
+    extends State<MantenimientoVuelosAdministradorPWidget> {
+  late MantenimientoVuelosAdministradorPModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => MantenimientoVuelosModel());
+    _model =
+        createModel(context, () => MantenimientoVuelosAdministradorPModel());
   }
 
   @override
@@ -35,7 +37,10 @@ class _MantenimientoVuelosWidgetState extends State<MantenimientoVuelosWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).accent1,
@@ -109,8 +114,8 @@ class _MantenimientoVuelosWidgetState extends State<MantenimientoVuelosWidget> {
                                   child: Align(
                                     alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
+                                      onPressed: () async {
+                                        context.pushNamed('CreateVuelos');
                                       },
                                       text: 'AGREGAR VUELO',
                                       options: FFButtonOptions(
@@ -148,49 +153,10 @@ class _MantenimientoVuelosWidgetState extends State<MantenimientoVuelosWidget> {
                                   child: Align(
                                     alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
+                                      onPressed: () async {
+                                        context.pushNamed('viewvuelo');
                                       },
-                                      text: 'EDITAR VUELO',
-                                      options: FFButtonOptions(
-                                        width: 315.0,
-                                        height: 40.0,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 0.0, 16.0, 0.0),
-                                        iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: const Color(0xFF242A4F),
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              fontFamily: 'Inter Tight',
-                                              color: Colors.white,
-                                              letterSpacing: 0.0,
-                                            ),
-                                        elevation: 0.0,
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Flexible(
-                                  child: Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
-                                    child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
-                                      },
-                                      text: 'CANCELAR VUELO',
+                                      text: 'EDITAR VUELO Y ELIMINAR',
                                       options: FFButtonOptions(
                                         width: 315.0,
                                         height: 40.0,
@@ -221,7 +187,7 @@ class _MantenimientoVuelosWidgetState extends State<MantenimientoVuelosWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 90.0, 0.0, 0.0),
                         child: Stack(
                           children: [
                             wrapWithModel(

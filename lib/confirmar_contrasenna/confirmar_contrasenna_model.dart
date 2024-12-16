@@ -7,29 +7,33 @@ class ConfirmarContrasennaModel
     extends FlutterFlowModel<ConfirmarContrasennaWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode1;
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode2;
-  TextEditingController? textController2;
-  String? Function(BuildContext, String?)? textController2Validator;
+  // State field(s) for password widget.
+  FocusNode? passwordFocusNode;
+  TextEditingController? passwordTextController;
+  late bool passwordVisibility;
+  String? Function(BuildContext, String?)? passwordTextControllerValidator;
+  // State field(s) for Rpassword widget.
+  FocusNode? rpasswordFocusNode;
+  TextEditingController? rpasswordTextController;
+  late bool rpasswordVisibility;
+  String? Function(BuildContext, String?)? rpasswordTextControllerValidator;
   // Model for navbar component.
   late NavbarModel navbarModel;
 
   @override
   void initState(BuildContext context) {
+    passwordVisibility = false;
+    rpasswordVisibility = false;
     navbarModel = createModel(context, () => NavbarModel());
   }
 
   @override
   void dispose() {
-    textFieldFocusNode1?.dispose();
-    textController1?.dispose();
+    passwordFocusNode?.dispose();
+    passwordTextController?.dispose();
 
-    textFieldFocusNode2?.dispose();
-    textController2?.dispose();
+    rpasswordFocusNode?.dispose();
+    rpasswordTextController?.dispose();
 
     navbarModel.dispose();
   }

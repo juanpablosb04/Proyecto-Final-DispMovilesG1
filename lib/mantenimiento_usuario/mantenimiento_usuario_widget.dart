@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/components/navbarv2_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -36,7 +37,10 @@ class _MantenimientoUsuarioWidgetState
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).accent1,
@@ -110,8 +114,8 @@ class _MantenimientoUsuarioWidgetState
                                   child: Align(
                                     alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
+                                      onPressed: () async {
+                                        context.pushNamed('DatosUsuario');
                                       },
                                       text: 'ADMINISTRAR USUARIO',
                                       options: FFButtonOptions(
@@ -149,10 +153,11 @@ class _MantenimientoUsuarioWidgetState
                                   child: Align(
                                     alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
+                                      onPressed: () async {
+                                        context
+                                            .pushNamed('ConfirmarContrasenna');
                                       },
-                                      text: 'BLOQUEAR USUARIO',
+                                      text: 'ACTUALIZAR CONTRASEÑA',
                                       options: FFButtonOptions(
                                         width: 315.0,
                                         height: 40.0,
@@ -188,8 +193,10 @@ class _MantenimientoUsuarioWidgetState
                                   child: Align(
                                     alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
+                                      onPressed: () async {
+                                        await authManager.deleteUser(context);
+
+                                        context.pushNamed('Register');
                                       },
                                       text: 'ELIMINAR USUARIO',
                                       options: FFButtonOptions(

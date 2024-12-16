@@ -82,7 +82,7 @@ class _Navbarv2WidgetState extends State<Navbarv2Widget> {
                                     size: 24.0,
                                   ),
                                   onPressed: () async {
-                                    context.pushNamed('HomePage');
+                                    context.pushNamed('RastreoVuelosP');
                                   },
                                 ),
                               ),
